@@ -1,0 +1,6 @@
+#openid__url,
+form#dw__login a.openid {
+    background: url(login-bg.gif) left center no-repeat;
+    padding-left: 18px;
+}
+

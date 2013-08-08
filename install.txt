@@ -1,0 +1,4 @@
+
+1. Copy the saml folder into dokuwiki plugin folder (lib/plugins)
+2. Config the SAML parameters in lib/plugins/saml/config.php file
+3. Check that saml plugin appears as enabled.
