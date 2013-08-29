@@ -12,9 +12,9 @@ This plugin allow you to different workflows:
 
     When the user access to the login page, he will be redirected to the IdP. After authenticate:
  
-        a) If is the first time, the user account will be created (stored in the file)
+      a) If is the first time, the user account will be created (stored in the file)
 
-        a) If the account already exists, the user account will be updated (stored in the file)
+      b) If the account already exists, the user account will be updated (stored in the file)
 
 
     HOW get that mode?
