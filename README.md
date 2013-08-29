@@ -47,7 +47,7 @@ Authors:
 
 That plugin was developed by Sixto Martin <sixto.martin.garcia@gmail.com>
 
-based on the work of several other:
+based on the work of several other authors:
 
  * Andreas Aakre Solberg, UNINETT, http://www.uninett.no
  * François Kooman
