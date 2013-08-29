@@ -6,7 +6,6 @@
  * Can intercepts the 'login' action and redirects the user to the IdP
  * instead of showing the login form. 
  * 
- * If force_saml is off, shows an alternative login entry (SAML IdP)
  * @author  Sixto Martin <sixto.martin.garcia@gmail.com>
  * @author  Andreas Aakre Solberg, UNINETT, http://www.uninett.no
  * @author  François Kooman

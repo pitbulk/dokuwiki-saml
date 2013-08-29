@@ -41,6 +41,25 @@ Doc index:
  * How install and enable the authsaml plugin
 
 
+Authors:
+
+That plugin was developed by Sixto Martin <sixto.martin.garcia@gmail.com>
+
+based on the work of several other:
+
+ * Andreas Aakre Solberg, UNINETT, http://www.uninett.no
+ * François Kooman
+ * Thijs Kinkhorst, Universiteit van Tilburg
+ * Jorge Hervás <jordihv@gmail.com>
+ * Lukas Slansky <lukas.slansky@upce.cz>
+
+
+License:
+
+GPL2 http://www.gnu.org/licenses/gpl.html
+
+
+
 How install and configure simpleSAMLphp as SP
 =============================================
 
