@@ -78,10 +78,10 @@ class saml_handler {
     public function getUserData($user) {
         if ($this->use_internal_user_store) {
             global $auth;
-            $auth->getUserData($user);
+            return $auth->getUserData($user);
         }
         else {
-            $this->getFILEUserData($user);
+            return $this->getFILEUserData($user);
         }
     }
 
@@ -204,8 +204,6 @@ class saml_handler {
 
         $userData = $this->getSAMLUserData();
 
-        //print_r($userData['grps']);exit();
-
         if ($this->use_internal_user_store) {
             global $auth;
             if ($auth->canDo('addUser')) {
@@ -230,13 +228,11 @@ class saml_handler {
         $userData = $this->getSAMLUserData($username);
 
 		if ($auth->canDo('modName')) {
-            $simplesaml_mail = $this->getConf('simplesaml_name');
-			if(!empty($userData['name'])) {
+    		if(!empty($userData['name'])) {
 				$changes['name'] = $userData['name'];
 			}
 		}
 		if ($auth->canDo('modMail')) {
-            $simplesaml_mail = $this->getConf('simplesaml_mail');
 			if(!empty($userData['mail'])) {
 				$changes['mail'] = $userData['mail'];
 			}

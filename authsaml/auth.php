@@ -55,7 +55,7 @@ class auth_plugin_authsaml extends DokuWiki_Auth_Plugin
 
     public function getUserData($user)
     {
-        $this->saml->getUserData($user);
+        return $this->saml->getUserData($user);
     }
 
 
