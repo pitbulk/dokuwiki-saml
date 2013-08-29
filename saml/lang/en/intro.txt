@@ -1,4 +1,0 @@
-====== OpenID Login ======
-
-You can log into this Wiki using the [[http://openid.net/|OpenID]] system.
-Just enter your OpenID identifier (a URL) into the login field.

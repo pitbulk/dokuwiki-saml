@@ -1,0 +1,4 @@
+<?php
+
+$lang['saml_connect'] = 'Single Sign On';
+$lang['login_link']   = 'Click the uniquid button to access';

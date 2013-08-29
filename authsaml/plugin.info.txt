@@ -1,0 +1,7 @@
+base authsaml
+author Sixto Martin
+email sixto.martin.garcia@gmail.com
+date 2013-08-26
+name SAML Authentication Plugin (based on simpleSAMLphp)
+desc Provides external authentication via simpleSAMLphp Service Provider instance
+url https://github.com/pitbulk/dokuwiki-saml
