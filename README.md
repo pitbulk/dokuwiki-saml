@@ -1,14 +1,14 @@
 authsaml plugin for dokuwiki
 ============================
 
-This plugin is a mix of the `ssp <https://www.dokuwiki.org/auth:ssp>`_ and the `simplesamldokuwiki <http://code.google.com/p/simplesamldokuwiki/>`_ plugin
+This plugin is a mix of the [ssp](https://www.dokuwiki.org/auth:ssp) and the [simplesamldokuwiki](http://code.google.com/p/simplesamldokuwiki/>) plugin
 
 
 This plugin allow you to different workflows:
 
 1. SAML ONLY
 
-    Allow only the saml authentication backend. Then the users will be stored in a plaintext file (data/users.saml.php)
+    Allow only the saml authentication backend. Then the users will be stored in a plaintext file ``data/users.saml.php``
 
     When the user access to the login page, he will be redirected to the IdP. After authenticate:
  
@@ -47,15 +47,13 @@ How install and configure simpleSAMLphp as SP
 Install simpleSAMLphp
 ---------------------
 
-First of all install the `simpleSAMLphp library dependences <http://simplesamlphp.org/docs/stable/simplesamlphp-install#section_3>`_:
+First of all install the [simpleSAMLphp library dependences](http://simplesamlphp.org/docs/stable/simplesamlphp-install#section_3):
 
-.. code-block:: bash
-
- CentOS --> yum install php5 php-ldap php-mbstring php-xml mod_ssl openssl
- Debian --> apt-get install php5 php5-mcrypt php5-mhash php5-mysql openssl
+    CentOS --> yum install php5 php-ldap php-mbstring php-xml mod_ssl openssl
+    Debian --> apt-get install php5 php5-mcrypt php5-mhash php5-mysql openssl
 
 
-Now we can download the `latest version of simpleSAMLphp <http://code.google.com/p/simplesamlphp/downloads/list>`_, now is the 1.11: ::
+Now we can download the [latest version of simpleSAMLphp](http://code.google.com/p/simplesamlphp/downloads/list>), now is the 1.11: ::
 
  Directly --> http://simplesamlphp.googlecode.com/files/simplesamlphp-1.11.0.tar.gz
  From subversion repository --> svn co http://simplesamlphp.googlecode.com/svn/tags/simplesamlphp-1.11.0
@@ -73,31 +71,22 @@ Create a self-signed cert
 
 In order to generate a self-signed cert you need openssl:
 
-.. code-block:: bash
-
- Centos --> yum install openssl
- Debian --> apt-get install openssl
+    Centos --> yum install openssl
+    Debian --> apt-get install openssl
 
 Using OpenSSL we will generate a self-signed certificate in 3 steps.
 
 * Generate private key:
 
-.. code-block:: bash
-
- openssl genrsa -out server.pem 1024
+    openssl genrsa -out server.pem 1024
 
 * Generate CSR: (In the "Common Name" set the domain of your instance)
 
-.. code-block:: bash
-
- openssl req -new -key server.pem -out server.csr
+    openssl req -new -key server.pem -out server.csr
 
 * Generate Self Signed Key:
 
-.. code-block:: bash
-
- openssl x509 -req -days 365 -in server.csr -signkey server.pem -out server.crt
-
+    openssl x509 -req -days 365 -in server.csr -signkey server.pem -out server.crt
 
 Override the certs of the ``/var/www/simplesamlphp/cert`` folder with the  generated certs.
 
@@ -164,7 +153,7 @@ And set admin and an sp source. Something like:
     ?>
 
 
-And now paste the metadata of your IdP in simpleSAMLphp format at /var/www/simplesamlphp/metadata/saml20-idp-remote.php
+And now paste the metadata of your IdP in simpleSAMLphp format at ``/var/www/simplesamlphp/metadata/saml20-idp-remote.php``
 
 
 Apache configuration
@@ -203,33 +192,29 @@ To get Saml2 run correctly we need have sure that all machine's clock are synced
 
 Install ntp: 
 
-.. code-block:: bash
-
- Centos --> yum install ntp
- Debian --> apt-get install ntp
+    Centos --> yum install ntp
+    Debian --> apt-get install ntp
 
 Configure the ntp service `/etc/ntp.conf`:
 
- server 0.uk.pool.ntp.org
- server 1.uk.pool.ntp.org
- server 2.uk.pool.ntp.org
- server 3.uk.pool.ntp.org
+    server 0.uk.pool.ntp.org
+    server 1.uk.pool.ntp.org
+    server 2.uk.pool.ntp.org
+    server 3.uk.pool.ntp.org
 
-`Check the` `ntp server list <http://www.pool.ntp.org/use.html>`_ `and use the server that is near from your server.`
+`Check the` [ntp server list](http://www.pool.ntp.org/use.html) `and use the server that is near from your server.`
 
 Enable the server and put it on the system boot
 
-.. code-block:: bash
+    Centos --> service ntpd start
+               chkconfig ntpd on
 
- Centos --> service ntpd start
-            chkconfig ntpd on
-
- Debian -> /etc/init.d/ntp start
-           update-rc.d ntp defaults
+    Debian -> /etc/init.d/ntp start
+              update-rc.d ntp defaults
 
 
 
-More info at http://simplesamlphp.org/docs/stable/simplesamlphp-sp
+More info at [http://simplesamlphp.org/docs/stable/simplesamlphp-sp](http://simplesamlphp.org/docs/stable/simplesamlphp-sp)
 
 
 
@@ -238,23 +223,23 @@ How install and enable the authsaml plugin
 
 1. Configure the authsaml plugin editing conf/default.php . There are some parameters that must be configured:
 
-     'simplesaml_path'. This refers to the path of the simpleSAMLphp folder. For example: /var/www/simplesamlphp
+    'simplesaml_path'. This refers to the path of the simpleSAMLphp folder. For example: /var/www/simplesamlphp
 
-     'simplesaml_authsource'. Select the SP source you want to connect to moodle. (Sources are at the SP of simpleSAMLphp in config/authsources.php).
+    'simplesaml_authsource'. Select the SP source you want to connect to moodle. (Sources are at the SP of simpleSAMLphp in config/authsources.php).
 
-     'simplesaml_uid'. It is the SAML attribute that will be mapped to the Dokuwiki username. For example 'uid'.
+    'simplesaml_uid'. It is the SAML attribute that will be mapped to the Dokuwiki username. For example 'uid'.
 
-     'simplesaml_mail'. It is the SAML attribute that will be mapped to the Dokuwiki mail. For example 'mail'. 
+    'simplesaml_mail'. It is the SAML attribute that will be mapped to the Dokuwiki mail. For example 'mail'. 
 
-     'simplesaml_name'. It is the SAML attribute that will be mapped to the Dokuwiki cn. For example 'cn'.
+    'simplesaml_name'. It is the SAML attribute that will be mapped to the Dokuwiki cn. For example 'cn'.
 
-     'simplesaml_grps'. It is the SAML attribute that will be mapped to the Dokuwiki groups. 
+    'simplesaml_grps'. It is the SAML attribute that will be mapped to the Dokuwiki groups. 
      // For example  'eduPersonAffiliation'.
 
-     'use_internal_user_store' False mean that users will be stored in a separate file.
+    'use_internal_user_store' False mean that users will be stored in a separate file.
                                If the authtype is set to authsaml, then the users will be always stored in a separate file
 
-     'force_saml_login'. When enabled, this will hide the normal login form and redirect directly to the IdP.
+    'force_saml_login'. When enabled, this will hide the normal login form and redirect directly to the IdP.
                          If the authtype is set to authsaml,  then the redirection will be always done
 
 
