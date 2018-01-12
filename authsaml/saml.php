@@ -285,7 +285,7 @@ class saml_handler {
             if(empty($line)) continue;
 
             $row = explode(":",$line,5);
-            $groups = array_values(array_filter(explode(",",$row[3])));
+            $groups = array_map('urldecode', array_values(array_filter(explode(",",$row[3]))));
 
             $this->users[$row[0]]['name'] = urldecode($row[1]);
             $this->users[$row[0]]['mail'] = $row[2];
@@ -314,7 +314,7 @@ class saml_handler {
             $userData['grps'] = array();
         }
 
-        $groups = join(',',$userData['grps']);
+        $groups = join(',',array_map('urlencode',$userData['grps']));
         $userline = join(':',array($username, $userData['name'], $userData['mail'], $groups))."\n";
         // Save new line into users file
         if (!io_saveFile($this->saml_user_file, $userline, true)) {
@@ -370,6 +370,7 @@ class saml_handler {
         }
 
         $groups   = join(',', $userinfo['grps']);
+        $groups   = array_map('urlencode', $groups);
 
         $userline = join(':', array($newuser, $userinfo['name'], $userinfo['mail'], $groups))."\n";
 
