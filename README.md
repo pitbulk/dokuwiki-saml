@@ -51,7 +51,7 @@ based on the work of several other authors:
 
  * Andreas Aakre Solberg, UNINETT, http://www.uninett.no
  * François Kooman
- * Thijs Kinkhorst, Universiteit van Tilburg
+ * Thijs Kinkhorst, Universiteit van Tilburg / SURFnet bv
  * Jorge Hervás <jordihv@gmail.com>
  * Lukas Slansky <lukas.slansky@upce.cz>
 
@@ -68,13 +68,13 @@ How install and configure simpleSAMLphp as SP
 Install simpleSAMLphp
 ---------------------
 
-First of all install the [simpleSAMLphp library dependences](http://simplesamlphp.org/docs/stable/simplesamlphp-install#section_3):
+First of all install the [simpleSAMLphp library dependences](https://simplesamlphp.org/docs/stable/simplesamlphp-install#section_3):
 
     CentOS --> yum install php5 php-ldap php-mbstring php-xml mod_ssl openssl
     Debian --> apt-get install php5 php5-mcrypt php5-mhash php5-mysql openssl
 
 
-Now we can download the [latest version of simpleSAMLphp](http://code.google.com/p/simplesamlphp/downloads/list>), now is the 1.11: ::
+Now we can download the [latest version of simpleSAMLphp](https://simplesamlphp.org/download), now is the 1.11: ::
 
  Directly --> http://simplesamlphp.googlecode.com/files/simplesamlphp-1.11.0.tar.gz
  From subversion repository --> svn co http://simplesamlphp.googlecode.com/svn/tags/simplesamlphp-1.11.0
@@ -235,7 +235,7 @@ Enable the server and put it on the system boot
 
 
 
-More info at [http://simplesamlphp.org/docs/stable/simplesamlphp-sp](http://simplesamlphp.org/docs/stable/simplesamlphp-sp)
+More info at [https://simplesamlphp.org/docs/stable/simplesamlphp-sp](https://simplesamlphp.org/docs/stable/simplesamlphp-sp)
 
 
 
@@ -309,5 +309,4 @@ Note: If you experience a "session lost" when trying to log in the dokuwiki, you
 
   Extra info about "session lost":
 
-		https://code.google.com/p/simplesamlphp/wiki/LostState
-		https://code.google.com/p/simplesamlphp/wiki/PHPSessions
+		https://simplesamlphp.org/docs/stable/simplesamlphp-nostate
