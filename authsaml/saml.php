@@ -6,7 +6,7 @@
  * @author  Sixto Martin <sixto.martin.garcia@gmail.com>
  * @author  Andreas Aakre Solberg, UNINETT, http://www.uninett.no
  * @author  François Kooman
- * @author  Thijs Kinkhorst, Universiteit van Tilburg
+ * @author  Thijs Kinkhorst, Universiteit van Tilburg / SURFnet bv
  * @author  Jorge Hervás <jordihv@gmail.com>, Lukas Slansky <lukas.slansky@upce.cz>
 
  * @license GPL2 http://www.gnu.org/licenses/gpl.html
@@ -225,7 +225,7 @@ class saml_handler {
 		global $auth, $conf;
 
 		$changes = array();
-        $userData = $this->getSAMLUserData($username);
+        $userData = $this->getSAMLUserData();
 
 		if ($auth->canDo('modName')) {
     		if(!empty($userData['name'])) {
