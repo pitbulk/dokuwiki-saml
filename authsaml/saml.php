@@ -6,7 +6,7 @@
  * @author  Sixto Martin <sixto.martin.garcia@gmail.com>
  * @author  Andreas Aakre Solberg, UNINETT, http://www.uninett.no
  * @author  François Kooman
- * @author  Thijs Kinkhorst, Universiteit van Tilburg
+ * @author  Thijs Kinkhorst, Universiteit van Tilburg / SURFnet bv
  * @author  Jorge Hervás <jordihv@gmail.com>, Lukas Slansky <lukas.slansky@upce.cz>
 
  * @license GPL2 http://www.gnu.org/licenses/gpl.html
@@ -225,7 +225,7 @@ class saml_handler {
 		global $auth, $conf;
 
 		$changes = array();
-        $userData = $this->getSAMLUserData($username);
+        $userData = $this->getSAMLUserData();
 
 		if ($auth->canDo('modName')) {
     		if(!empty($userData['name'])) {
@@ -285,7 +285,7 @@ class saml_handler {
             if(empty($line)) continue;
 
             $row = explode(":",$line,5);
-            $groups = array_values(array_filter(explode(",",$row[3])));
+            $groups = array_map('urldecode', array_values(array_filter(explode(",",$row[3]))));
 
             $this->users[$row[0]]['name'] = urldecode($row[1]);
             $this->users[$row[0]]['mail'] = $row[2];
@@ -314,7 +314,7 @@ class saml_handler {
             $userData['grps'] = array();
         }
 
-        $groups = join(',',$userData['grps']);
+        $groups = join(',',array_map('urlencode',$userData['grps']));
         $userline = join(':',array($username, $userData['name'], $userData['mail'], $groups))."\n";
         // Save new line into users file
         if (!io_saveFile($this->saml_user_file, $userline, true)) {
@@ -370,6 +370,7 @@ class saml_handler {
         }
 
         $groups   = join(',', $userinfo['grps']);
+        $groups   = array_map('urlencode', $groups);
 
         $userline = join(':', array($newuser, $userinfo['name'], $userinfo['mail'], $groups))."\n";
 
