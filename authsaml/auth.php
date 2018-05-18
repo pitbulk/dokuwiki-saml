@@ -53,7 +53,7 @@ class auth_plugin_authsaml extends DokuWiki_Auth_Plugin
      * @return string|null
      */
 
-    public function getUserData($user)
+    public function getUserData($user, $requireGroups = true)
     {
         return $this->saml->getUserData($user);
     }
@@ -68,7 +68,7 @@ class auth_plugin_authsaml extends DokuWiki_Auth_Plugin
      * {@inheritdoc}
      * @see DokuWiki_Auth_Plugin::trustExternal()
      */
-    public function trustExternal()
+    public function trustExternal($user, $pass, $sticky = false)
     {
         $this->saml->get_ssp_instance();
 
