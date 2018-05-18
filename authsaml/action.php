@@ -38,7 +38,7 @@ class action_plugin_authsaml extends DokuWiki_Action_Plugin
 	 * Register SAML event handlers
 	 */
 
-    public function register(Doku_Event_Handler &$controller)
+    public function register(Doku_Event_Handler $controller)
     {
 
         require_once('saml.php');
