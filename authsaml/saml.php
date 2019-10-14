@@ -369,8 +369,8 @@ class saml_handler {
             $userinfo[$field] = $value;
         }
 
-        $groups   = join(',', $userinfo['grps']);
-        $groups   = array_map('urlencode', $groups);
+        $groups   = array_map('urlencode', $userinfo['grps']);
+        $groups   = join(',', $groups);
 
         $userline = join(':', array($newuser, $userinfo['name'], $userinfo['mail'], $groups))."\n";
 

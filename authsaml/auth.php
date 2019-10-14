@@ -37,6 +37,7 @@ class auth_plugin_authsaml extends DokuWiki_Auth_Plugin
 
         // $this->cando['external'] = true;
 
+        $this->cando['modGroups'] = true;
         $this->cando['external'] = true;
         $this->cando['logoff'] = true;
         $this->success = true;
