@@ -34,9 +34,9 @@ class action_plugin_authsaml extends DokuWiki_Action_Plugin
 
     protected $saml;
 
-	/**
-	 * Register SAML event handlers
-	 */
+    /**
+     * Register SAML event handlers
+     */
 
     public function register(Doku_Event_Handler $controller)
     {
@@ -46,13 +46,13 @@ class action_plugin_authsaml extends DokuWiki_Action_Plugin
         $this->saml = new saml_handler($this->conf);
 
 
-		$controller->register_hook('HTML_LOGINFORM_OUTPUT', 'BEFORE', $this, 'handle_login_form');
+        $controller->register_hook('HTML_LOGINFORM_OUTPUT', 'BEFORE', $this, 'handle_login_form');
         $controller->register_hook('ACTION_ACT_PREPROCESS', 'BEFORE', $this, 'handle_login');
     }
 
-	/**
-	 * Redirect Login Handler. Redirect to the IdP if force_saml_login is True
-	 */
+    /**
+     * Redirect Login Handler. Redirect to the IdP if force_saml_login is True
+     */
     public function handle_login($event, $param)
     {
         global $ACT, $auth;
@@ -62,28 +62,28 @@ class action_plugin_authsaml extends DokuWiki_Action_Plugin
         if ('login' == $ACT) {
             $force_saml_login = $this->getConf('force_saml_login');
             if ($force_saml_login) {
-				$this->saml->ssp->requireAuth();
-			}
+                $this->saml->ssp->requireAuth();
+            }
 
             if ($this->saml->ssp->isAuthenticated()) {
 
-	            $username = $this->saml->getUsername();
+                $username = $this->saml->getUsername();
 
                 $user = $this->saml->getUserData($username);
 
-	            if(!$user) {
-		            if(!$this->saml->register_user($username)) {
-			            $auth->sucess = false;
-			            //Exception error creating
-		            }
-		            else {
-			            $user = $this->saml->getUserData($username);
-		            }
-	            }
-	            else {
-		            $this->saml->update_user($username);
-	            }
-    		    $this->saml->login($username);
+                if(!$user) {
+                    if(!$this->saml->register_user($username)) {
+                        $auth->sucess = false;
+                        //Exception error creating
+                    }
+                    else {
+                        $user = $this->saml->getUserData($username);
+                    }
+                }
+                else {
+                    $this->saml->update_user($username);
+                }
+                $this->saml->login($username);
             }
         }
         if ('logout' == $ACT) {
@@ -93,20 +93,20 @@ class action_plugin_authsaml extends DokuWiki_Action_Plugin
         }
     }
 
-	/**
-	 * Insert link to SAML SP 
-	 */
-	function handle_login_form(&$event, $param)
-	{
+    /**
+     * Insert link to SAML SP 
+     */
+    function handle_login_form(&$event, $param)
+    {
         global $auth;
 
         $this->saml->get_ssp_instance();
 
-		$fieldset  = '<fieldset height="400px" style="margin-bottom:20px;"><legend padding-top:-5px">'.$this->getLang('saml_connect').'</legend>';
-		$fieldset .= '<center><a href="'.$this->saml->ssp->getLoginURL().'"><img src="lib/plugins/authsaml/logo.gif" alt="uniquid - saml"></a><br>';
-		$fieldset .= $this->getLang('login_link').'</center></fieldset>';
-		$pos = $event->data->findElementByAttribute('type', 'submit');
-		$event->data->insertElement($pos-4, $fieldset);
-	}
+        $fieldset  = '<fieldset height="400px" style="margin-bottom:20px;"><legend padding-top:-5px">'.$this->getLang('saml_connect').'</legend>';
+        $fieldset .= '<center><a href="'.$this->saml->ssp->getLoginURL().'"><img src="lib/plugins/authsaml/logo.gif" alt="uniquid - saml"></a><br>';
+        $fieldset .= $this->getLang('login_link').'</center></fieldset>';
+        $pos = $event->data->findElementByAttribute('type', 'submit');
+        $event->data->insertElement($pos-4, $fieldset);
+    }
 
 }

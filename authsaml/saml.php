@@ -59,7 +59,7 @@ class saml_handler {
     }
 
     /**
-	 *  Get a simplesamlphp auth instance (initiate it when it does not exist)
+     *  Get a simplesamlphp auth instance (initiate it when it does not exist)
      */
     public function get_ssp_instance()
     {
@@ -161,7 +161,7 @@ class saml_handler {
         return isset($this->users[$user]) ? $this->users[$user] : false;
     }
 
-	function login($username)
+    function login($username)
     {
         global $conf, $USERINFO;
 
@@ -195,12 +195,12 @@ class saml_handler {
             $_SESSION[DOKU_COOKIE]['auth']['info'] = $USERINFO;
             $_SESSION[DOKU_COOKIE]['auth']['time'] = time();
         }
-	}
+    }
 
-	function register_user($username) {
-		global $auth;
-		$user = $username;
-		$pass = auth_pwgen();
+    function register_user($username) {
+        global $auth;
+        $user = $username;
+        $pass = auth_pwgen();
 
         $userData = $this->getSAMLUserData();
 
@@ -210,7 +210,7 @@ class saml_handler {
                 if (empty($userData['grps'])) {
                     $userData['grps'] = array($this->defaultgroup);
                 }
-        		return $auth->createUser($user, $pass, $userData['name'], $userData['mail'], $userData['grps']);
+                return $auth->createUser($user, $pass, $userData['name'], $userData['mail'], $userData['grps']);
             }
             else {
                 return false;
@@ -219,44 +219,44 @@ class saml_handler {
         else {
             return $this->_saveUserData($username, $userData);
         }
-	}
+    }
 
-	function update_user($username) {
-		global $auth, $conf;
+    function update_user($username) {
+        global $auth, $conf;
 
-		$changes = array();
+        $changes = array();
         $userData = $this->getSAMLUserData();
 
-		if ($auth->canDo('modName')) {
-    		if(!empty($userData['name'])) {
-				$changes['name'] = $userData['name'];
-			}
-		}
-		if ($auth->canDo('modMail')) {
-			if(!empty($userData['mail'])) {
-				$changes['mail'] = $userData['mail'];
-			}
+        if ($auth->canDo('modName')) {
+            if(!empty($userData['name'])) {
+                $changes['name'] = $userData['name'];
+            }
+        }
+        if ($auth->canDo('modMail')) {
+            if(!empty($userData['mail'])) {
+                $changes['mail'] = $userData['mail'];
+            }
         }
         if ($auth->canDo('modGroups')) {
-			if(!empty($userData['grps'])) {
-				$changes['grps'] = $userData['grps'];
-			}
+            if(!empty($userData['grps'])) {
+                $changes['grps'] = $userData['grps'];
+            }
         }
 
-		if (!empty($changes)) {
+        if (!empty($changes)) {
             if ($this->use_internal_user_store) {
                 $auth->modifyUser($username, $changes);
             }
             else {
                 $this->modifyUser($username, $changes);
             }
-		}
-	}
+        }
+    }
 
     function delete_user($users) {
         if ($this->use_internal_user_store) {
             global $auth;
-    		return $auth->deleteUser($users);
+            return $auth->deleteUser($users);
         }
         else {
             return $this->deleteUsers($users);
