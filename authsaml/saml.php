@@ -175,6 +175,19 @@ class saml_handler {
 
             $userData = $this->getUserData($username);
 
+            if(!$userData) {
+                if(!$this->register_user($username)) {
+                    return false;
+                }
+            }
+            else {
+                if(!$this->update_user($username)) {
+                    return false;
+                }
+            }
+
+            $userData = $this->getUserData($username);
+
             $USERINFO['name'] = $userData['name'];
             $USERINFO['mail'] = $userData['mail'];
             $USERINFO['grps'] = $userData['grps'];
@@ -194,6 +207,7 @@ class saml_handler {
             $_SESSION[DOKU_COOKIE]['auth']['buid'] = auth_browseruid();
             $_SESSION[DOKU_COOKIE]['auth']['info'] = $USERINFO;
             $_SESSION[DOKU_COOKIE]['auth']['time'] = time();
+            return true;
         }
     }
 
