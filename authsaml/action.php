@@ -90,7 +90,7 @@ class action_plugin_authsaml extends DokuWiki_Action_Plugin
         if ($force_saml_login) {
             /* if we're forcing SAML login, get rid of the existing login form. yes this is a pretty ugly way of deleting the form but this is what's possible given the dokuwiki API... */
             while($event->data->getElementAt(0)) {
-            $event->data->replaceElement(0, null);
+                $event->data->replaceElement(0, null);
             }
         }
 
