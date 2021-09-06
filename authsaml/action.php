@@ -86,6 +86,14 @@ class action_plugin_authsaml extends DokuWiki_Action_Plugin
 
         $this->saml->get_ssp_instance();
 
+        $force_saml_login = $this->getConf('force_saml_login');
+        if ($force_saml_login) {
+            /* if we're forcing SAML login, get rid of the existing login form. yes this is a pretty ugly way of deleting the form but this is what's possible given the dokuwiki API... */
+            while($event->data->getElementAt(0)) {
+            $event->data->replaceElement(0, null);
+            }
+        }
+
         $fieldset  = '<fieldset height="400px" style="margin-bottom:20px;"><legend padding-top:-5px">'.$this->getLang('saml_connect').'</legend>';
         $fieldset .= '<center><a href="'.$this->saml->ssp->getLoginURL().'"><img src="lib/plugins/authsaml/logo.gif" alt="uniquid - saml"></a><br>';
         $fieldset .= $this->getLang('login_link').'</center></fieldset>';
