@@ -321,7 +321,7 @@ class saml_handler {
           msg('Error saving user data (2)', -1);
           return false;
         }
-        $this->users[$username] = $userinfo;
+        $this->users[$username] = $userData;
         return true;
     }
 
