@@ -259,11 +259,13 @@ class saml_handler {
 
         if (!empty($changes)) {
             if ($this->use_internal_user_store) {
-                $auth->modifyUser($username, $changes);
+                return $auth->modifyUser($username, $changes);
             }
             else {
-                $this->modifyUser($username, $changes);
+                return $this->modifyUser($username, $changes);
             }
+        } else {
+            return true;
         }
     }
 
