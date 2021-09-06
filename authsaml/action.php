@@ -89,8 +89,7 @@ class action_plugin_authsaml extends DokuWiki_Action_Plugin
         $fieldset  = '<fieldset height="400px" style="margin-bottom:20px;"><legend padding-top:-5px">'.$this->getLang('saml_connect').'</legend>';
         $fieldset .= '<center><a href="'.$this->saml->ssp->getLoginURL().'"><img src="lib/plugins/authsaml/logo.gif" alt="uniquid - saml"></a><br>';
         $fieldset .= $this->getLang('login_link').'</center></fieldset>';
-        $pos = $event->data->findElementByAttribute('type', 'submit');
-        $event->data->insertElement($pos-4, $fieldset);
+        $event->data->insertElement(0, $fieldset);
     }
 
 }
