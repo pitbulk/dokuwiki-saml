@@ -66,23 +66,7 @@ class action_plugin_authsaml extends DokuWiki_Action_Plugin
             }
 
             if ($this->saml->ssp->isAuthenticated()) {
-
                 $username = $this->saml->getUsername();
-
-                $user = $this->saml->getUserData($username);
-
-                if(!$user) {
-                    if(!$this->saml->register_user($username)) {
-                        $auth->sucess = false;
-                        //Exception error creating
-                    }
-                    else {
-                        $user = $this->saml->getUserData($username);
-                    }
-                }
-                else {
-                    $this->saml->update_user($username);
-                }
                 $this->saml->login($username);
             }
         }
